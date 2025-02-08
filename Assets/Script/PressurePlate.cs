@@ -13,7 +13,7 @@ public class PressurePlate : MonoBehaviour
     {
         if (obj != null)
         {
-            targetHeight = obj.GetComponent<Renderer>().bounds.size.y; // Get the object's height
+            targetHeight = obj.GetComponent<Renderer>().bounds.size.y;
         }
     }
 
@@ -54,7 +54,6 @@ public class PressurePlate : MonoBehaviour
 
     void OnTriggerEnter(Collider collide)
     {
-        Debug.Log("יייייי");
         if (!collide.gameObject.CompareTag("FireBall"))
         {
             pushed += 1;
@@ -63,7 +62,6 @@ public class PressurePlate : MonoBehaviour
 
     void OnTriggerExit(Collider collide)
     {
-        Debug.Log("dsfqsdfqsdf");
         if (!collide.gameObject.CompareTag("FireBall"))
         {
             pushed -= 1;
