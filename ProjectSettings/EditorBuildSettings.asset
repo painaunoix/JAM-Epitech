@@ -11,6 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 7c4400d1f758746428f1ea40b057761b
+  - enabled: 1
+    path: Assets/Scenes/Aymeric.unity
+    guid: d9e842324b4c19047b24c6fffcc412b2
+  - enabled: 1
+    path: Assets/Scenes/Intro.unity
+    guid: 88179e396c0d4a64c95cf5203ee18a1a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
