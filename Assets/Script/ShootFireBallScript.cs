@@ -14,7 +14,7 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         if (Input.GetMouseButtonDown(0)) {
-            Instantiate(fireball, shootingPoint.transform.position, Quaternion.identity);
+            Instantiate(fireball, shootingPoint.transform.position, shootingPoint.rotation);
         }
     }
 }
