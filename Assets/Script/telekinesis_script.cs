@@ -10,29 +10,30 @@ public class ForceController : MonoBehaviour
     private bool isTelekinesisActive = false;
     private GameObject selectedObject;
     private Rigidbody selectedObjectRb;
-    private float holdDistance; // Distance actuelle de l'objet par rapport au joueur
+    private float holdDistance;
 
-    private bool isRotating = false; // Indique si la rotation est activée
-    private float rotationSpeed = 100f; // Vitesse de rotation
-    private float rotationXSpeed = 50f; // Vitesse de la rotation sur l'axe X
-    private float minRotationX = -45f; // Limite inférieure de rotation sur l'axe X
-    private float maxRotationX = 45f;  // Limite supérieure de rotation sur l'axe X
-    private bool rotateAroundX = false; // Indicateur pour savoir si on tourne sur l'axe X ou Y
+    private bool isRotating = false;
+    private float rotationSpeed = 100f;
+    private float rotationXSpeed = 50f;
+    private float minRotationX = -45f;
+    private float maxRotationX = 45f;
+    private bool rotateAroundX = false;
+
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F)) // Prendre ou relâcher l'objet
+        if (Input.GetKeyDown(KeyCode.F))
         {
             ToggleTelekinesis();
         }
 
-        if (Input.GetKeyDown(KeyCode.R)) // Activer ou désactiver la rotation de l'objet
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            isRotating = !isRotating; // Alterne l'état de la rotation
+            isRotating = !isRotating;
             Debug.Log("Rotation " + (isRotating ? "activée" : "désactivée"));
         }
 
-        if (Input.GetKeyDown(KeyCode.Q)) // Changer l'axe de rotation (X ou Y)
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             rotateAroundX = !rotateAroundX;
             string axis = rotateAroundX ? "X" : "Y";
@@ -41,9 +42,9 @@ public class ForceController : MonoBehaviour
 
         if (isTelekinesisActive && selectedObject != null)
         {
-            HandleTelekinesisInput(); // Entrées pour déplacer ou tourner l'objet
+            HandleTelekinesisInput();
 
-            MoveObjectToHoldPosition(); // Maintient l'objet en face du joueur
+            MoveObjectToHoldPosition();
         }
     }
 
@@ -84,8 +85,7 @@ public class ForceController : MonoBehaviour
             selectedObjectRb.angularVelocity = Vector3.zero;
             selectedObjectRb.linearDamping = 10;
         }
-
-        holdDistance = Vector3.Distance(playerCamera.transform.position, selectedObject.transform.position); // Définit la distance initiale
+        holdDistance = Vector3.Distance(playerCamera.transform.position, selectedObject.transform.position);
         isTelekinesisActive = true;
     }
 
@@ -98,7 +98,6 @@ public class ForceController : MonoBehaviour
                 selectedObjectRb.useGravity = true;
                 selectedObjectRb.linearDamping = 0;
             }
-
             selectedObject = null;
             selectedObjectRb = null;
         }
@@ -107,40 +106,38 @@ public class ForceController : MonoBehaviour
 
     private void HandleTelekinesisInput()
     {
-        if (isRotating) // Si la rotation est activée
+        if (isRotating)
         {
-            if (rotateAroundX) // Si on tourne autour de l'axe X
+            if (rotateAroundX)
             {
-                // Rotation autour de l'axe X
-                if (Input.GetMouseButton(0)) // Clic gauche -> Rotation autour de l'axe X (haut/bas)
+                if (Input.GetMouseButton(0))
                 {
-                    RotateObject(0, 1); // Rotation dans le sens haut-bas
+                    RotateObject(0, 1);
                 }
-                if (Input.GetMouseButton(1)) // Clic droit -> Rotation autour de l'axe X (haut/bas)
+                if (Input.GetMouseButton(1))
                 {
-                    RotateObject(0, -1); // Rotation dans le sens bas-haut
+                    RotateObject(0, -1);
                 }
             }
-            else // Si on tourne autour de l'axe Y
+            else
             {
-                // Rotation autour de l'axe Y
-                if (Input.GetMouseButton(0)) // Clic gauche -> Rotation autour de l'axe Y (gauche/droite)
+                if (Input.GetMouseButton(0))
                 {
-                    RotateObject(1, 0); // Rotation dans le sens horaire
+                    RotateObject(1, 0);
                 }
-                if (Input.GetMouseButton(1)) // Clic droit -> Rotation autour de l'axe Y (gauche/droite)
+                if (Input.GetMouseButton(1))
                 {
-                    RotateObject(-1, 0); // Rotation dans le sens antihoraire
+                    RotateObject(-1, 0);
                 }
             }
         }
-        else // Si la rotation n'est pas activée, on déplace l'objet
+        else
         {
-            if (Input.GetMouseButton(0)) // Clic gauche -> Rapproche l'objet
+            if (Input.GetMouseButton(0))
             {
                 MoveObjectCloser();
             }
-            if (Input.GetMouseButton(1)) // Clic droit -> Éloigne l'objet
+            if (Input.GetMouseButton(1))
             {
                 MoveObjectFarther();
             }
@@ -170,20 +167,17 @@ public class ForceController : MonoBehaviour
     {
         if (selectedObject != null)
         {
-            // Rotation autour de l'axe Y (gauche/droite)
+
             if (!rotateAroundX)
             {
-                // Appliquer la rotation autour de l'axe Y (gauche/droite)
                 Quaternion rotationYQuat = Quaternion.Euler(0, rotationY * rotationSpeed * Time.deltaTime, 0);
-                selectedObject.transform.rotation *= rotationYQuat; // Appliquer la rotation à l'objet
+                selectedObject.transform.rotation *= rotationYQuat;
             }
 
-            // Rotation autour de l'axe X (haut/bas)
             if (rotateAroundX)
             {
-                // Rotation autour de l'axe X (haut/bas) en utilisant un quaternion
                 Quaternion rotationXQuat = Quaternion.Euler(rotationX * rotationXSpeed * Time.deltaTime, 0, 0);
-                selectedObject.transform.rotation *= rotationXQuat; // Appliquer la rotation à l'objet
+                selectedObject.transform.rotation *= rotationXQuat;
             }
         }
     }
