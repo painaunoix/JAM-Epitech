@@ -59,7 +59,6 @@ public class ForceController : MonoBehaviour
             ReleaseObject();
         }
     }
-
     private void TrySelectObject()
     {
         RaycastHit hit;
