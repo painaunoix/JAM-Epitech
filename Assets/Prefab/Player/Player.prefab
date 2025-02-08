@@ -192,6 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 5577673436409222625}
   speed: 12
+  sprintSpeed: 18
   gravity: -18
   jumpHeight: 3
   groundCheck: {fileID: 4586517069433926435}
@@ -199,6 +200,8 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 1024
+  animator: {fileID: 0}
+  playerModel: {fileID: 0}
 --- !u!1 &6790777086212885168
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,3 +354,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensitivity: 400
   playerBody: {fileID: 8404145551624020444}
+  flameShooter: {fileID: 0}
