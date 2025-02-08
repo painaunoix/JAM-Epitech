@@ -21,7 +21,6 @@ public class ParabolicProjectile : MonoBehaviour
         targetPosition = target.position;
         timeToTarget = Vector3.Distance(startPosition, targetPosition) / speed;
 
-        // Lancer l'affichage des particules après 0.5 secondes
         Invoke("SpawnCanonParticles", 0.01f);
     }
 
@@ -32,12 +31,10 @@ public class ParabolicProjectile : MonoBehaviour
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / timeToTarget;
 
-            // Calcul de la trajectoire parabolique
             Vector3 position = Vector3.Lerp(startPosition, targetPosition, t);
             position.y += Mathf.Sin(t * Mathf.PI) * height;
             transform.position = position;
 
-            // Déplacer les particules avec le projectile
             if (particlesSpawned && CanonParticlesInstance != null)
             {
                 CanonParticlesInstance.transform.position = transform.position;
@@ -57,8 +54,6 @@ public class ParabolicProjectile : MonoBehaviour
             CanonParticlesInstance.Play();
             particlesSpawned = true;
 
-            // Détruire les particules après 1 seconde
-            // StartCoroutine(DestroyParticlesAfterTime(0.4f));
         }
     }
 
