@@ -8,7 +8,7 @@ public class MobMovement : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH");
-        Destroy(other.gameObject);
+        //Destroy(other.gameObject);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
