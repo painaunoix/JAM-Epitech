@@ -10,6 +10,7 @@ public class PlayerPowers : MonoBehaviour
         powers["Fireball"] = false;
         powers["Snap"] = false;
         powers["Telekinesis"] = false;
+        powers["TPBall"] = false;
     }
 
     public void SetPowerState(string powerName, bool state)
