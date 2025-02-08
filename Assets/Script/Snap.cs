@@ -26,12 +26,6 @@ public class Snap : MonoBehaviour
                 snap_to_present();
             }
         }
-        if (isWaitingForSnap) {
-            timeRemainingText.text = "Temps restant : " + Mathf.Ceil(timeToNextSnap) + "s";
-        }
-        else {
-            timeRemainingText.text = "";
-        }
     }
 
     public void snap_to_future()
@@ -54,6 +48,7 @@ public class Snap : MonoBehaviour
             snap_Anim.SetBool("snap", true);
             auth_snap = false;
             timeToNextSnap = 15f;
+            StopCoroutine(snap_to_future_cour());
             StartCoroutine(snap_to_present_cour());
         }
     }
