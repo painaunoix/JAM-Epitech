@@ -1843,6 +1843,7 @@ GameObject:
   - component: {fileID: 7816450180626501602}
   - component: {fileID: 7807773647695809722}
   - component: {fileID: 5019725378634893866}
+  - component: {fileID: 2710292280783282908}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Untagged
@@ -1932,6 +1933,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootingPoint: {fileID: 226311758352970172}
   fireball: {fileID: 4908796538858424884, guid: eb609ead7b4aa7e4b8a2fa47725a5ef9, type: 3}
+--- !u!65 &2710292280783282908
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6998687629092073539}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 3.7673101, z: 1}
+  m_Center: {x: 0, y: 0.048367262, z: 0}
 --- !u!1 &7014522841897823547
 GameObject:
   m_ObjectHideFlags: 0
