@@ -7,7 +7,7 @@ public class Torch : MonoBehaviour
     public GameObject fire;
     public void OnEnable()
     {
-        fireBall = TagHandle.GetExistingTag("Fire_ball");
+        fireBall = TagHandle.GetExistingTag("FireBall");
     }
 
     void OnTriggerEnter(Collider other)
