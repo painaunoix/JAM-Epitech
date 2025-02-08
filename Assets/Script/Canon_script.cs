@@ -7,6 +7,8 @@ public class ParabolicProjectile : MonoBehaviour
     public float speed = 10f;
     public float height = 2f;
     public ParticleSystem CanonParticles;
+    public Torch torch;
+    public bool isStart = false;
 
     private ParticleSystem CanonParticlesInstance;
     private Vector3 startPosition;
@@ -15,7 +17,7 @@ public class ParabolicProjectile : MonoBehaviour
     private float elapsedTime = 0f;
     private bool particlesSpawned = false;
 
-    void Start()
+    void StartBall()
     {
         startPosition = transform.position;
         targetPosition = target.position;
@@ -26,23 +28,30 @@ public class ParabolicProjectile : MonoBehaviour
 
     void Update()
     {
-        if (elapsedTime < timeToTarget)
-        {
-            elapsedTime += Time.deltaTime;
-            float t = elapsedTime / timeToTarget;
-
-            Vector3 position = Vector3.Lerp(startPosition, targetPosition, t);
-            position.y += Mathf.Sin(t * Mathf.PI) * height;
-            transform.position = position;
-
-            if (particlesSpawned && CanonParticlesInstance != null)
-            {
-                CanonParticlesInstance.transform.position = transform.position;
-            }
+        if (torch.is_Torch_Active == true && isStart == false) {
+            isStart = true;
+            StartBall();
         }
-        else
-        {
-            DestroyProjectile();
+        if (isStart == true) {
+            if (elapsedTime < timeToTarget)
+            {
+                elapsedTime += Time.deltaTime;
+                float t = elapsedTime / timeToTarget;
+
+                Vector3 position = Vector3.Lerp(startPosition, targetPosition, t);
+                position.y += Mathf.Sin(t * Mathf.PI) * height;
+                transform.position = position;
+
+                if (particlesSpawned && CanonParticlesInstance != null)
+                {
+                    CanonParticlesInstance.transform.position = transform.position;
+                }
+            }
+            else
+            {
+                SpawnCanonParticles();
+                StartCoroutine(Whait_Time(0.7f));
+            }
         }
     }
 
@@ -57,14 +66,10 @@ public class ParabolicProjectile : MonoBehaviour
         }
     }
 
-    private IEnumerator DestroyParticlesAfterTime(float delay)
+    private IEnumerator Whait_Time(float delay)
     {
         yield return new WaitForSeconds(delay);
-        if (CanonParticlesInstance != null)
-        {
-            CanonParticlesInstance.Stop();
-            Destroy(CanonParticlesInstance.gameObject);
-        }
+        DestroyProjectile();
     }
 
     private void DestroyProjectile()
@@ -75,5 +80,6 @@ public class ParabolicProjectile : MonoBehaviour
         }
 
         Destroy(gameObject);
+        Destroy(target.gameObject);
     }
 }

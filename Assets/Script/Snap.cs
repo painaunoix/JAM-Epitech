@@ -15,9 +15,11 @@ public class Snap : MonoBehaviour
     private float timeToNextSnap = 0f;
     private bool isWaitingForSnap = false;
 
+    public SpellSelector spellSelector;
+
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetMouseButtonDown(0) && spellSelector.Spell_Active == 1)
         {
             if (present_state == true && auth_snap) {
                 snap_to_future();
