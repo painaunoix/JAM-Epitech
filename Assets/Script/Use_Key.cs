@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Use_Key : MonoBehaviour
 {
-    public GameObject wall;
     public Collect_Key Key;
     private TagHandle Player;
     public bool is_in;
@@ -28,6 +27,6 @@ public class Use_Key : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && is_in && Key.key)
-            wall.SetActive(false);
+            gameObject.SetActive(false);
     }
 }
