@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class SoundManager : MonoBehaviour
 {
-    public Slider volumeSlider;
+    public Slider volumeSlide;
 
     void Start()
     {
@@ -11,7 +11,7 @@ public class SoundManager : MonoBehaviour
 
     public void ChangeVolume()
     {
-        AudioListener.volume = volumeSlider.value;
+        AudioListener.volume = volumeSlide.value;
         Save();
     }
 
@@ -19,17 +19,17 @@ public class SoundManager : MonoBehaviour
     {
         if (PlayerPrefs.HasKey("musicVolume"))
         {
-            volumeSlider.value = PlayerPrefs.GetFloat("musicVolume");
+            volumeSlide.value = PlayerPrefs.GetFloat("musicVolume");
         }
         else
         {
-            volumeSlider.value = 1;
+            volumeSlide.value = 1;
         }
-        AudioListener.volume = volumeSlider.value;
+        AudioListener.volume = volumeSlide.value;
     }
 
     public void Save()
     {
-        PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
+        PlayerPrefs.SetFloat("musicVolume", volumeSlide.value);
     }
 }
