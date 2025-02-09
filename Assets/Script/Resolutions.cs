@@ -28,15 +28,28 @@ public class Resolutions : MonoBehaviour
         }
 
         resolutionDropDown.AddOptions(options);
-        Load();
 
+        if (PlayerPrefs.HasKey("resolutionIndex"))
+        {
+            int resolutionIndex = PlayerPrefs.GetInt("resolutionIndex");
+            resolutionDropDown.value = resolutionIndex;
+        }
+        else
+        {
+            resolutionDropDown.value = currentResolutionIndex;
+        }
+        resolutionDropDown.RefreshShownValue();
+
+        resolutionDropDown.value = GetCurrentResolutionIndex();
+        resolutionDropDown.RefreshShownValue();
         resolutionDropDown.onValueChanged.AddListener(setResolution);
     }
 
     public void setResolution(int resolutionIndex)
     {
-        if (resolutions == null)
+        if (resolutions == null || resolutionIndex < 0 || resolutionIndex >= resolutions.Length)
             return;
+
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         Save();
@@ -49,12 +62,24 @@ public class Resolutions : MonoBehaviour
             int resolutionIndex = PlayerPrefs.GetInt("resolutionIndex");
             resolutionDropDown.value = resolutionIndex;
             resolutionDropDown.RefreshShownValue();
-            setResolution(resolutionIndex);
         }
     }
 
     public void Save()
     {
         PlayerPrefs.SetInt("resolutionIndex", resolutionDropDown.value);
+    }
+
+    private int GetCurrentResolutionIndex()
+    {
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            if (resolutions[i].width == Screen.currentResolution.width && 
+                resolutions[i].height == Screen.currentResolution.height)
+            {
+                return i;
+            }
+        }
+        return 0;
     }
 }
