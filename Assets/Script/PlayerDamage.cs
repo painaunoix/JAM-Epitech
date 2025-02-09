@@ -16,7 +16,7 @@ public class PlayerDamage : MonoBehaviour
 
     public void TakeDamagePlayer()
     {
-        if (!isInvulnerable) // Vérifie si le joueur est vulnérable
+        if (!isInvulnerable)
         {
             currentHealth--;
             StartCoroutine(InvulnerabilityCooldown());
@@ -31,7 +31,7 @@ public class PlayerDamage : MonoBehaviour
     IEnumerator InvulnerabilityCooldown()
     {
         isInvulnerable = true;
-        yield return new WaitForSeconds(0.5f); // Le joueur est invulnérable 0.5 sec après un dégât
+        yield return new WaitForSeconds(0.5f);
         isInvulnerable = false;
     }
 
@@ -40,7 +40,7 @@ public class PlayerDamage : MonoBehaviour
         if (other.CompareTag("EnnemiFireBall"))
         {
             TakeDamagePlayer();
-            Debug.Log($"Player touché ! Vie restante : {currentHealth}");
+            Debug.Log($"Player touchï¿½ ! Vie restante : {currentHealth}");
         }
     }
 
@@ -57,5 +57,5 @@ public class PlayerDamage : MonoBehaviour
     void Die()
     {
         Debug.Log("Mob est mort");
-    }   
+    }
 }

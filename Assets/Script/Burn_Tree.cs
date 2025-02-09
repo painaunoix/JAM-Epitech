@@ -23,11 +23,11 @@ public class Burn_Tree : MonoBehaviour
     }
     void Start()
     {
-        
+
     }
 
     void Update()
     {
-        
+
     }
 }

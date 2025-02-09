@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class FootstepSound : MonoBehaviour
 {
-    public AudioSource audioSource;  // Référence à l'AudioSource
-    public AudioClip[] footstepSounds;  // Tableau des sons de pas
-    public CharacterController characterController; // Pour détecter le mouvement
+    public AudioSource audioSource;
+    public AudioClip[] footstepSounds;
+    public CharacterController characterController;
 
     private void Start()
     {

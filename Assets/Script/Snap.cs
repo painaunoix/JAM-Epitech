@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
-using TMPro; // Utilisation de TextMeshPro
+using TMPro;
 
 public class Snap : MonoBehaviour
 {
