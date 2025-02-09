@@ -42,6 +42,8 @@ public class PlayerDamage : MonoBehaviour
             TakeDamagePlayer();
             Debug.Log($"Player touch� ! Vie restante : {currentHealth}");
         }
+        if (other.CompareTag("EnnemiCac"))
+            TakeDamagePlayer();
     }
 
     void Update()

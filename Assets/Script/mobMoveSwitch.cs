@@ -23,8 +23,11 @@ public class MobMoveSwitch : MonoBehaviour
     private bool isBehaviorAActive = true;
     private float timer = 0f;
 
+    private Animator animator;
+
     void Start()
     {
+        animator = GetComponent<Animator>();
         if (behaviorA != null) behaviorA.enabled = true;
         if (behaviorB != null) behaviorB.enabled = false;
         currentHealth = (int)maxHealth;
@@ -42,6 +45,12 @@ public class MobMoveSwitch : MonoBehaviour
         {
             SwitchBehavior();
         }
+        if (player != null)
+        {
+            Vector3 direction = player.position - transform.position;
+            direction.y = 0;
+            transform.rotation = Quaternion.LookRotation(direction);
+        }
     }
 
     void SwitchBehavior()
@@ -54,20 +63,31 @@ public class MobMoveSwitch : MonoBehaviour
 
         if (isBehaviorAActive)
         {
+            animator.SetBool("Move", false);
             StartCoroutine(FireballRoutine());
+        } else
+        {
+            animator.SetBool("Move", true);
         }
     }
 
     IEnumerator FireballRoutine()
     {
-        yield return new WaitForSeconds(3f);
+        animator.SetTrigger("Cast");
+        yield return new WaitForSeconds(1f);
+
         ShootFireball();
         Debug.Log("Fireball 1 launched");
 
         yield return new WaitForSeconds(6f);
+
+        animator.SetTrigger("Cast");
+        yield return new WaitForSeconds(1f);
+
         ShootFireball();
         Debug.Log("Fireball 2 launched");
     }
+
 
     void ShootFireball()
     {
@@ -105,6 +125,11 @@ public class MobMoveSwitch : MonoBehaviour
             Debug.Log($"Mob touché ! Vie restante : {currentHealth}");
             Destroy(other.gameObject);
         }
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("CCCCCCCCCCAAAAAAAAAAAAACCCCCCCCC");
+            animator.SetTrigger("Cac");
+        }
     }
 
     void UpdateHealthBar()
@@ -118,6 +143,11 @@ public class MobMoveSwitch : MonoBehaviour
     void Die()
     {
         Debug.Log("Mob est mort");
-        Destroy(gameObject);
+        animator.SetTrigger("Death"); // Déclenche l'animation de mort
+        GetComponent<Collider>().enabled = false; // Désactive les collisions
+        this.enabled = false; // Désactive le script
+
+        Destroy(gameObject, 3f); // Détruit l'ennemi après 3 secondes
     }
+
 }

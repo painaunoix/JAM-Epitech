@@ -9,6 +9,7 @@ TagManager:
   - FireBall
   - TPBall
   - Interactable
+  - EnnemiCac
   layers:
   - Default
   - TransparentFX
