@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerDamage : MonoBehaviour
 {
@@ -58,6 +60,7 @@ public class PlayerDamage : MonoBehaviour
 
     void Die()
     {
+        SceneManager.LoadScene("Aymeric");
         Debug.Log("Mob est mort");
     }
 }

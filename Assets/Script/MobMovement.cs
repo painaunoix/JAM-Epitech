@@ -5,16 +5,17 @@ public class MobMovement : MonoBehaviour
     public GameObject Player;
     private float speed;
     private Animator animator;
+    public MobMoveSwitch mobMoveSwitch;
 
     private void Start()
     {
-        speed = Random.Range(5f, 15f);
+        speed = 7f;
         animator = GetComponent<Animator>();
     }
 
     void Update()
     {
-        if (Player != null)
+        if (Player != null && mobMoveSwitch.dead == false)
         {
             Vector3 direction = (Player.transform.position - transform.position).normalized;
             direction.y = 0;

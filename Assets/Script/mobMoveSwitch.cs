@@ -18,12 +18,15 @@ public class MobMoveSwitch : MonoBehaviour
 
     public GameObject[] healthBars;
     public float maxHealth = 3f;
-    private int currentHealth;
+    public int currentHealth;
 
     private bool isBehaviorAActive = true;
     private float timer = 0f;
 
     private Animator animator;
+    public bool canTakeDamage = true;
+    public bool dead = false;
+    public CountEnemies countEnemies;
 
     void Start()
     {
@@ -108,26 +111,35 @@ public class MobMoveSwitch : MonoBehaviour
         if (currentHealth > 0)
         {
             currentHealth--;
-            UpdateHealthBar();
+            UpdateHealthBar();  
 
             if (currentHealth <= 0)
             {
                 Die();
+                countEnemies.count();
             }
         }
+    }
+
+    IEnumerator timerCoroutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+        canTakeDamage = true;
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("FireBall"))
         {
-            TakeDamage();
-            Debug.Log($"Mob touché ! Vie restante : {currentHealth}");
-            Destroy(other.gameObject);
+            if (canTakeDamage == true) {
+                canTakeDamage = false;
+                StartCoroutine(timerCoroutine());
+                Destroy(other.gameObject);
+                TakeDamage();
+            }
         }
         if (other.CompareTag("Player"))
         {
-            Debug.Log("CCCCCCCCCCAAAAAAAAAAAAACCCCCCCCC");
             animator.SetTrigger("Cac");
         }
     }
@@ -142,12 +154,13 @@ public class MobMoveSwitch : MonoBehaviour
 
     void Die()
     {
+        dead = true;
         Debug.Log("Mob est mort");
         animator.SetTrigger("Death"); // Déclenche l'animation de mort
         GetComponent<Collider>().enabled = false; // Désactive les collisions
         this.enabled = false; // Désactive le script
 
-        Destroy(gameObject, 3f); // Détruit l'ennemi après 3 secondes
+        Destroy(gameObject, 2f); // Détruit l'ennemi après 3 secondes
     }
 
 }

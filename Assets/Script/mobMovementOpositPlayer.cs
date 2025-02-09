@@ -8,15 +8,17 @@ public class mobMovementOpositPlayer : MonoBehaviour
     private float moveSpeed;
     private Animator animator;
 
+    public MobMoveSwitch mobMoveSwitch;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
-        moveSpeed = Random.Range(5f, 15f);
+        moveSpeed = 7f;
     }
 
     void Update()
     {
-        if (Player != null)
+        if (Player != null && mobMoveSwitch.dead == false)
         {
             Vector3 directionToPlayer = transform.position - Player.transform.position;
             directionToPlayer.y = 0;

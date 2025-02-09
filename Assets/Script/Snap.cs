@@ -49,7 +49,7 @@ public class Snap : MonoBehaviour
             present_state = true;
             snap_Anim.SetBool("snap", true);
             auth_snap = false;
-            timeToNextSnap = 15f;
+            timeToNextSnap = 8f;
             StopCoroutine(snap_to_future_cour());
             StartCoroutine(snap_to_present_cour());
         }
