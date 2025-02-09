@@ -11,6 +11,7 @@ public class ForceController : MonoBehaviour
     private GameObject selectedObject;
     private Rigidbody selectedObjectRb;
     private float holdDistance;
+    public SpellSelector spellSelector;
 
     private bool isRotating = false;
     private float rotationSpeed = 100f;
@@ -22,18 +23,18 @@ public class ForceController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && spellSelector.Spell_Active == 3)
         {
             ToggleTelekinesis();
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R)  && spellSelector.Spell_Active == 3)
         {
             isRotating = !isRotating;
             Debug.Log("Rotation " + (isRotating ? "activée" : "désactivée"));
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q)  && spellSelector.Spell_Active == 3)
         {
             rotateAroundX = !rotateAroundX;
             string axis = rotateAroundX ? "X" : "Y";

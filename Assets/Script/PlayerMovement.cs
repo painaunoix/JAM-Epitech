@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
+    public LayerMask telekMask;
 
     Vector3 velocity;
     bool isGrounded;
@@ -33,7 +34,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        if (Physics.CheckSphere(groundCheck.position, groundDistance, groundMask) || Physics.CheckSphere(groundCheck.position, groundDistance, telekMask))
+            isGrounded = true;
+        else
+            isGrounded = false;
         animator.SetBool("isGrounded", isGrounded);
 
         if (isGrounded && velocity.y < 0) {

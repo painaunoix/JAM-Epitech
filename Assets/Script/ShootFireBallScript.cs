@@ -27,7 +27,7 @@ public class PlayerScript : MonoBehaviour
                 StartCoroutine(fireball_cour());
             }
         }
-        if (Input.GetKeyDown(KeyCode.E)) {
+        if (Input.GetMouseButtonDown(0)) {
             if (playerPowers != null && playerPowers.HasPower("TPBall") && spellSelector.Spell_Active == 4 && TPball_ready) {
                 TPball_ready = false;
                 Instantiate(TPBall, shootingPoint.transform.position, shootingPoint.rotation);
