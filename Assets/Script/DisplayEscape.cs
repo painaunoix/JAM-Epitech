@@ -6,6 +6,11 @@ public class DisplayEscape : MonoBehaviour
     public GameObject settingsPanel;
     public SoundManager soundManager;
     public Resolutions resolutionManager;
+    public PlayerMovement playerController;
+    public MouseLook cameraController;
+    public PlayerScript playerScript;
+    public Snap snap;
+    public ForceController forceController;
 
     void Start()
     {
@@ -16,7 +21,11 @@ public class DisplayEscape : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            settingsPanel.SetActive(!settingsPanel.activeSelf);
+            playerController.audioSource.Stop();
+            bool isActive = !settingsPanel.activeSelf;
+            settingsPanel.SetActive(isActive);
+            ToggleCursor(isActive);
+            ToggleControls(!isActive);
             SaveSettings();
         }
 
@@ -26,16 +35,20 @@ public class DisplayEscape : MonoBehaviour
             {
                 SaveSettings();
                 settingsPanel.SetActive(false);
+                ToggleCursor(false);
+                ToggleControls(true);
             }
         }
     }
 
     public void PressedButton()
     {
+        bool isActive = !settingsPanel.activeSelf;
+        settingsPanel.SetActive(isActive);
+        ToggleCursor(isActive);
+        ToggleControls(!isActive);
         SaveSettings();
-        settingsPanel.SetActive(false);
     }
-
 
     private bool IsPointerOverUIElement()
     {
@@ -60,5 +73,25 @@ public class DisplayEscape : MonoBehaviour
             soundManager.Load();
         if (resolutionManager != null)
             resolutionManager.Load();
+    }
+
+    private void ToggleCursor(bool showCursor)
+    {
+        Cursor.lockState = showCursor ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = showCursor;
+    }
+
+    private void ToggleControls(bool enable)
+    {
+        if (playerController != null)
+            playerController.enabled = enable;
+        if (cameraController != null)
+            cameraController.enabled = enable;
+        if (playerScript != null)
+            playerScript.enabled = enable;
+        if (snap != null)
+            snap.enabled = enable;
+        if (forceController != null)
+            forceController.enabled = enable;
     }
 }

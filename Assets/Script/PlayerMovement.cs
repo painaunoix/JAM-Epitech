@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
     bool isGrounded;
     bool isMoving;
+    public Slider volumeSlider;
 
     public Animator animator;
 
@@ -55,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
         isMoving = move != Vector3.zero;
         animator.SetBool("isMoving", isMoving);
 
-        if (isMoving) {
+        if (isMoving && isGrounded) {
             animator.SetFloat("speed", Input.GetKey(KeyCode.LeftShift) ? 1f : 0.5f);
             if (!audioSource.isPlaying) {
                 audioSource.Play();
@@ -83,5 +85,10 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    public void ChangeVolume()
+    {
+        audioSource.volume = volumeSlider.value;
     }
 }
