@@ -3,37 +3,20 @@ using UnityEngine;
 public class MobMovement : MonoBehaviour
 {
     public GameObject Player;
+    private float speed;
 
-    void OnTriggerEnter(Collider other)
+    private void Start()
     {
-        Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH");
-        //Destroy(other.gameObject);
+        speed = Random.Range(5f, 15f);
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (Player != null)
         {
-            Vector3 targetPosition = Player.transform.position;
-            if (targetPosition.x < transform.position.x)
-                transform.Translate(Vector3.left * Time.deltaTime * 2);
-            if (targetPosition.z < transform.position.z)
-                transform.Translate(Vector3.back * Time.deltaTime * 2);
-            if (targetPosition.y < transform.position.y)
-                transform.Translate(Vector3.down * Time.deltaTime * 2);
-            if (targetPosition.x > transform.position.x)
-                transform.Translate(Vector3.right * Time.deltaTime * 2);
-            if (targetPosition.z > transform.position.z)
-                transform.Translate(Vector3.forward * Time.deltaTime * 2);
-            if (targetPosition.y < transform.position.y)
-                transform.Translate(Vector3.up * Time.deltaTime * 2);
+            Vector3 direction = (Player.transform.position - transform.position).normalized;
+            direction.y = 0; // Bloque le mouvement vertical
+            transform.Translate(direction * speed * Time.deltaTime, Space.World);
         }
     }
 }

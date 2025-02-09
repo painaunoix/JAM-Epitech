@@ -4,6 +4,8 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - Undefined
+  - EnnemiFireBall
   - FireBall
   - TPBall
   - Interactable
