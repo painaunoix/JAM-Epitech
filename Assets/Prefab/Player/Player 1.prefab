@@ -1913,6 +1913,9 @@ MonoBehaviour:
   sprintSpeed: 18
   gravity: -18
   jumpHeight: 3
+  audioSource: {fileID: 3729938809884231218, guid: 88048a066833edf44baeb7e6b2d6fd07, type: 3}
+  footstepSounds: []
+  characterController: {fileID: 0}
   groundCheck: {fileID: 6224767399786713329}
   groundDistance: 0.4
   groundMask:
@@ -1935,6 +1938,7 @@ MonoBehaviour:
   shootingPoint: {fileID: 226311758352970172}
   fireball: {fileID: 4908796538858424884, guid: eb609ead7b4aa7e4b8a2fa47725a5ef9, type: 3}
   playerPowers: {fileID: 1963627927378831494}
+  TPBall: {fileID: 0}
 --- !u!65 &2710292280783282908
 BoxCollider:
   m_ObjectHideFlags: 0

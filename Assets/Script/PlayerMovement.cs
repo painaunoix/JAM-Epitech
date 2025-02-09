@@ -8,6 +8,9 @@ public class PlayerMovement : MonoBehaviour
     public float sprintSpeed = 18f;
     public float gravity = -30f;
     public float jumpHeight = 3f;
+    public AudioSource audioSource;
+    public AudioClip[] footstepSounds;
+    public CharacterController characterController;
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
@@ -20,6 +23,13 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
 
     public GameObject playerModel;
+
+
+    void Start()
+    {
+        if (!audioSource)
+            audioSource = GetComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -43,9 +53,16 @@ public class PlayerMovement : MonoBehaviour
 
         if (isMoving) {
             animator.SetFloat("speed", Input.GetKey(KeyCode.LeftShift) ? 1f : 0.5f);
+            if (!audioSource.isPlaying) {
+                audioSource.Play();
+            }
         } else {
+            if (audioSource.isPlaying) {
+                audioSource.Stop();
+            }
             animator.SetFloat("speed", 0f);
         }
+
 
         controller.Move(move * currentSpeed * Time.deltaTime);
 
